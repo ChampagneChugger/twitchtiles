@@ -33,7 +33,7 @@
 			const usernames: string[] = username.split(",")
 
 			usernames.map((usernamesItem: string) => {
-				if (streams.length == 24) return
+				if (streams.length == 24 || usernamesItem == "") return
 
 				streams.push({
 					id: streams.length == 0 ? 1 : streams[streams.length - 1].id + 1,
@@ -41,7 +41,7 @@
 				})
 			})
 		} else if (username.length > 0) {
-			if (streams.length == 24) return
+			if (streams.length == 24 || username == "") return
 
 			streams.push({ id: streams.length == 0 ? 1 : streams[streams.length - 1].id + 1, username })
 		}

@@ -2,6 +2,7 @@
 	import Menu from "$lib/components/Menu.svelte"
 	import Confirm from "$lib/components/Confirm.svelte"
 	import Popup from "$lib/components/Popup.svelte"
+	import Settings from "$lib/components/Settings.svelte"
 	import { toast } from "@jill64/svelte-toast"
 	import { X } from "lucide-svelte"
 
@@ -12,7 +13,7 @@
 
 	let streams = $state<Stream[]>([])
 	let selectedStreams = $state<Stream[]>([])
-	let appState = $state<"addStream" | "removeStream" | null>(null)
+	let appState = $state<"addStream" | "removeStream" | "settings" | null>(null)
 
 	function addStream() {
 		appState = "addStream"
@@ -78,6 +79,21 @@
 		appState = null
 		$toast.success(`Successfully removed ${streamAmount} streams`)
 	}
+
+	function toggleSettings() {
+		appState = appState == "settings" ? null : "settings"
+	}
+
+	let columns = $state<string>("6")
+
+	$effect(() => {
+		document.documentElement.style.setProperty("--columns", columns)
+
+		document.documentElement.style.setProperty(
+			"--rows",
+			String(Math.ceil(streams.length / Number(columns)))
+		)
+	})
 </script>
 
 <svelte:head>
@@ -106,11 +122,15 @@
 	</div>
 {/if}
 
+{#if appState == "settings"}
+	<Settings bind:appState bind:columns />
+{/if}
+
 {#if selectedStreams.length > 0 && appState == "removeStream"}
 	<Confirm {confirmDelete} {selectedStreams} />
 {/if}
 
-<Menu {addStream} {removeStreams} {appState} {closeStream} />
+<Menu {addStream} {removeStreams} {appState} {closeStream} {toggleSettings} />
 
 {#if appState == "addStream"}
 	<Popup bind:appState {addStreamItem} />

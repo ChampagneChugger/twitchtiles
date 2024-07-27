@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { tilt } from "$lib/functions/tilt"
-	import { Plus, Minus, MoveDown, MoveUp, X } from "lucide-svelte"
+	import { Plus, Minus, MoveDown, MoveUp, X, Settings } from "lucide-svelte"
 
 	let menuOpen = $state<boolean>(false)
 	let menuUp = $state<HTMLButtonElement>()
@@ -8,12 +8,14 @@
 		addStream,
 		removeStreams,
 		appState,
-		closeStream
+		closeStream,
+		toggleSettings
 	}: {
 		addStream: any
 		removeStreams: any
-		appState: "addStream" | "removeStream" | null
+		appState: "addStream" | "removeStream" | "settings" | null
 		closeStream: any
+		toggleSettings: any
 	} = $props()
 
 	function menuToggle() {
@@ -37,9 +39,20 @@
 			<Minus />
 		</button>
 	{/if}
-	<button onclick={menuToggle}>
-		<MoveDown />
-	</button>
+	<div class="button-group">
+		<button onclick={menuToggle}>
+			<MoveDown />
+		</button>
+		{#if appState == "settings"}
+			<button onclick={toggleSettings}>
+				<X />
+			</button>
+		{:else}
+			<button onclick={toggleSettings}>
+				<Settings />
+			</button>
+		{/if}
+	</div>
 	{#if appState == "addStream"}
 		<button onclick={closeStream}>
 			<X />

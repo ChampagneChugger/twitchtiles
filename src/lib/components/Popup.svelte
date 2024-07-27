@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from "svelte/transition"
+	import { fade, fly } from "svelte/transition"
 	import { Forward } from "lucide-svelte"
 
 	let { appState = $bindable(), addStreamItem }: { appState: any; addStreamItem: any } = $props()
@@ -22,7 +22,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div class="popup-wrapper" transition:fade={{ duration: 300 }} onclick={self(() => close())}>
-	<div class="popup">
+	<div class="popup" transition:fly={{ duration: 300, y: 30 }}>
 		<div class="input-group">
 			<input
 				type="text"

@@ -17,6 +17,11 @@ main {
     background-color: #121212;
 }
 
+:root {
+    --columns: 6;
+    --rows: 1;
+}
+
 .menu {
     display: flex;
     justify-content: space-around;
@@ -33,6 +38,7 @@ main {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     transition: 0.3s linear;
     z-index: 3;
+    background-color: rgba(18, 18, 18, 0.3);
 }
 
 .removeStreams {
@@ -44,7 +50,7 @@ main {
     border: 0px;
     padding: 5px;
     transition: 0.1s linear;
-    background-color: transparent;
+    background-color: rgba(18, 18, 18, 0.9);
     color: silver;
     border-radius: 10px;
     font-size: 14px;
@@ -159,9 +165,10 @@ main {
 }
 
 .streams {
+    height: 85%;
     display: grid;
-    grid-template-rows: repeat(4, 200px);
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 }
 
 .streams iframe {
@@ -187,4 +194,85 @@ main {
     position: absolute;
     cursor: pointer;
     background-color: rgba(18, 18, 18, 0.7);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.settings h1 {
+    color: silver;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+}
+
+.option {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: silver;
+    font-size: 14px;
+    gap: 30px;
+}
+
+.range-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.range-group input {
+    appearance: none;
+    height: 5px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.range-group input::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: silver;
+    border-radius: 50%;
 }

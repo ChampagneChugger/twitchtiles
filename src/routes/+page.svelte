@@ -32,10 +32,17 @@
 			const usernames: string[] = username.split(",")
 
 			usernames.map((usernamesItem: string) => {
-				streams.push({ id: streams.length == 0 ? 1 : streams.length + 1, username: usernamesItem })
+				if (streams.length == 24) return
+
+				streams.push({
+					id: streams.length == 0 ? 1 : streams[streams.length - 1].id + 1,
+					username: usernamesItem
+				})
 			})
 		} else if (username.length > 0) {
-			streams.push({ id: streams.length == 0 ? 1 : streams.length + 1, username })
+			if (streams.length == 24) return
+
+			streams.push({ id: streams.length == 0 ? 1 : streams[streams.length - 1].id + 1, username })
 		}
 	}
 

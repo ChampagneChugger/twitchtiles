@@ -84,7 +84,7 @@
 		appState = appState == "settings" ? null : "settings"
 	}
 
-	let columns = $state<string>("6")
+	let columns = $state<string>("1")
 
 	$effect(() => {
 		document.documentElement.style.setProperty("--columns", columns)

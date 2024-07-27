@@ -113,7 +113,7 @@
 				{/if}
 				<iframe
 					title={username}
-					src="https://player.twitch.tv/?channel={username}&parent=https://twitchtiles.vercel.app&muted=true"
+					src="https://player.twitch.tv/?channel={username}&parent=twitchtiles.vercel.app&muted=true"
 					allowfullscreen
 				>
 				</iframe>

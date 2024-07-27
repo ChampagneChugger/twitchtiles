@@ -77,7 +77,9 @@
 
 		selectedStreams = []
 		appState = null
-		$toast.success(`Successfully removed ${streamAmount} streams`)
+		$toast.success(
+			`Successfully removed ${streamAmount} ${streamAmount == 1 ? "stream" : "streams"}`
+		)
 	}
 
 	function toggleSettings() {
